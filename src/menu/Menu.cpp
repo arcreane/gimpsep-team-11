@@ -13,7 +13,7 @@ void Menu::run() {
             displayMenu();
             std::cin >> choice;
             if (choice == 9) {
-                break
+                break;
             }
             processInput(choice);
         }
