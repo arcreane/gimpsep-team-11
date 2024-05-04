@@ -65,44 +65,15 @@ void Menu::processInput(int choice) {
     }
 }
 
-void Menu::loadImage() {
-    std::cout << "Enter image path: ";
-    std::cin >> imagePath;
-   // editor.loadImage(imagePath);
-}
+void Menu::loadImage() {}
 
-void Menu::saveImage() {
-    std::string outputPath;
-    std::cout << "Enter output file path: ";
-    std::cin >> outputPath;
-    // save image
-}
+void Menu::saveImage() {}
 
-void Menu::applyDilation() {
-    // Implementation for dilation
-    int size;
-    std::cout << "Enter dilation size: ";
-    std::cin >> size;
-   // editor.dilateImage(size);
-    std::cout << "Dilation applied.\n";
-}
+void Menu::applyDilation() {}
 
-void Menu::applyErosion() {
-    int size;
-    std::cout << "Enter erosion size: ";
-    std::cin >> size;
-    //editor.erodeImage(size);
-    std::cout << "Erosion applied.\n";
-}
+void Menu::applyErosion() {}
 
-void Menu::resizeImage(){
-    int size;
-    std::cout << "Enter new size: ";
-    std::cin >> size;
-    //
-    std::cout << "image resized .\n";
-
-}
+void Menu::resizeImage(){}
 
 void Menu::lightenDarkenImage(){}
 void Menu::stitchImages(){}
