@@ -24,5 +24,4 @@ public:
     Menu();
     void run();
 };
-
-#endif MENU_H
+#endif //MENU_H

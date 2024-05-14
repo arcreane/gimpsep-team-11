@@ -9,12 +9,14 @@
 class ImageEditor {
 private:
     cv::Mat image;
+    bool hasValidExtension(const std::string& filename);
 
 public:
     ImageEditor() {}
     ImageEditor(const std::string& imagePath);
 
     void loadImage(const std::string& imagePath);
+    bool saveImage(const std::string& outputPath);
 
     void dilateImage(int size);
     void erodeImage(int size);
@@ -24,10 +26,8 @@ public:
     void stitchImages(const std::vector<std::string>& filenames);
     void cannyEdgeDetection(double lowerThreshold, double upperThreshold, int kernelSize);
 
-    bool saveImage(const std::string& outputPath);
-
     cv::Mat getImage() const;
     virtual ~ImageEditor(){}
 };
 
-#endif IMAGEEDITOR_H
+#endif //IMAGEEDITOR_H
