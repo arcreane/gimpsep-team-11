@@ -65,9 +65,19 @@ void Menu::processInput(int choice) {
     }
 }
 
-void Menu::loadImage() {}
+void Menu::loadImage() {
+    std::cout << "Enter the path of the image to load: ";
+    std::cin >> imagePath;
+    editor.loadImage(imagePath);
+}
 
-void Menu::saveImage() {}
+void Menu::saveImage() {
+    std::string outputPath;
+    std::cout << "Enter the path to save the image (with extension, e.g., output.jpg): "<<std::endl;
+
+    std::cin >> outputPath;
+    editor.saveImage(outputPath);
+}
 
 void Menu::applyDilation() {}
 
