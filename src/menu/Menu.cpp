@@ -1,7 +1,6 @@
 #include "Menu.h"
 
-Menu::Menu() {
-}
+Menu::Menu() : editor("") {}
 
 void Menu::run() {
     int choice = 0;
@@ -12,7 +11,7 @@ void Menu::run() {
         } else {
             displayMenu();
             std::cin >> choice;
-            if (choice == 9) {
+            if (choice == 10) {
                 break;
             }
             processInput(choice);
@@ -30,7 +29,8 @@ void Menu::displayMenu() {
     std::cout << "6. Lighten/Darken image\n";
     std::cout << "7. Stitch images into panorama\n";
     std::cout << "8. Apply Canny edge detection\n";
-    std::cout << "9. Exit\n";
+    std::cout << "9. Display current image\n";
+    std::cout << "10. Exit\n";
     std::cout << "Select an option: ";
 }
 
@@ -60,6 +60,9 @@ void Menu::processInput(int choice) {
         case 8:
             cannyEdgeDetection();
             break;
+        case 9:
+            displayImage();
+            break;
         default:
             std::cout << "Invalid choice. Please try again.\n";
     }
@@ -73,18 +76,33 @@ void Menu::loadImage() {
 
 void Menu::saveImage() {
     std::string outputPath;
-    std::cout << "Enter the path to save the image (with extension, e.g., output.jpg): "<<std::endl;
-
+    std::cout << "Enter the path to save the image (with extension, e.g., output.jpg): ";
     std::cin >> outputPath;
     editor.saveImage(outputPath);
 }
 
-void Menu::applyDilation() {}
+void Menu::applyDilation() {
+    int size;
+    std::cout << "Enter the dilation size: ";
+    std::cin >> size;
+    editor.dilateImage(size);
+}
 
-void Menu::applyErosion() {}
+void Menu::applyErosion() {
+    int size;
+    std::cout << "Enter the erosion size: ";
+    std::cin >> size;
+    editor.erodeImage(size);
+}
 
-void Menu::resizeImage(){}
+void Menu::resizeImage() {}
 
-void Menu::lightenDarkenImage(){}
-void Menu::stitchImages(){}
-void Menu::cannyEdgeDetection(){}
+void Menu::lightenDarkenImage() {}
+
+void Menu::stitchImages() {}
+
+void Menu::cannyEdgeDetection() {}
+
+void Menu::displayImage() {
+    editor.displayImage();
+}

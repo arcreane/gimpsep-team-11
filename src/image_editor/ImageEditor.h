@@ -10,6 +10,7 @@ class ImageEditor {
 private:
     cv::Mat image;
     bool hasValidExtension(const std::string& filename);
+    bool checkImageLoaded() const;
 
 public:
     ImageEditor() {}
@@ -17,6 +18,7 @@ public:
 
     void loadImage(const std::string& imagePath);
     bool saveImage(const std::string& outputPath);
+    void displayImage() const;
 
     void dilateImage(int size);
     void erodeImage(int size);
