@@ -1,4 +1,4 @@
-#include "ImageEditor.h"
+#include "../include/ImageEditor.h"
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>

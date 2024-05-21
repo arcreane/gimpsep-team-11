@@ -1,4 +1,4 @@
-#include "ImageManager.h"
+#include "../include/ImageManager.h"
 
 void ImageManager::addImage(const Image& image) {
     images.push_back(image);
