@@ -26,10 +26,7 @@ void ImageEditor::loadImage(const std::string& imagePath) {
 }
 
 bool ImageEditor::saveImage(const std::string& outputPath) {
-    if (image.empty()) {
-        std::cerr << "Error: No image to save." << std::endl;
-        return false;
-    }
+    if (!checkImageLoaded()) return false;
 
     std::string savePath = outputPath;
 
@@ -59,10 +56,28 @@ bool ImageEditor::hasValidExtension(const std::string& filename) {
     return false;
 }
 
+void ImageEditor::displayImage() const {
+    if (!checkImageLoaded()) return;
+
+    cv::imshow("Image", image);
+    cv::waitKey(1);
+    cv::destroyWindow("Image");
+}
+
 void ImageEditor::dilateImage(int size) {
+    if (!checkImageLoaded()) return;
+
+    cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(size, size));
+    cv::dilate(image, image, element);
+    std::cout << "Image dilation applied with size " << size << std::endl;
 }
 
 void ImageEditor::erodeImage(int size) {
+    if (!checkImageLoaded()) return;
+
+    cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(size, size));
+    cv::erode(image, image, element);
+    std::cout << "Image erosion applied with size " << size << std::endl;
 }
 
 void ImageEditor::resizeImage(double scale) {
@@ -83,4 +98,12 @@ void ImageEditor::cannyEdgeDetection(double lowerThreshold, double upperThreshol
 
 cv::Mat ImageEditor::getImage() const {
     return image;
+}
+
+bool ImageEditor::checkImageLoaded() const {
+    if (image.empty()) {
+        std::cout << "No image " << std::endl;
+        return false;
+    }
+    return true;
 }

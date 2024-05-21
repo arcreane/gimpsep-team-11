@@ -20,6 +20,7 @@ private:
     void lightenDarkenImage();
     void stitchImages();
     void cannyEdgeDetection();
+    void displayImage();
 public:
     Menu();
     void run();
