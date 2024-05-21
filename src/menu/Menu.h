@@ -3,16 +3,17 @@
 
 #include "../image_editor/ImageEditor.h"
 #include <string>
-#include <iostream>
 
 class Menu {
-private:
-    ImageEditor editor;
-    std::string imagePath;
+public:
+    Menu();
+    void run();
 
+private:
     void displayMenu();
     void processInput(int choice);
     void loadImage();
+    void loadMultipleImages();
     void saveImage();
     void applyDilation();
     void applyErosion();
@@ -21,8 +22,10 @@ private:
     void stitchImages();
     void cannyEdgeDetection();
     void displayImage();
-public:
-    Menu();
-    void run();
+    void undo();
+
+    ImageEditor editor;
+    std::string imagePath;
 };
-#endif //MENU_H
+
+#endif // MENU_H
