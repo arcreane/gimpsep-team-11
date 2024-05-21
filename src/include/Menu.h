@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "../image_editor/ImageEditor.h"
+#include "ImageEditor.h"
 #include <string>
 
 class Menu {

@@ -1,8 +1,8 @@
 #ifndef IMAGEEDITOR_H
 #define IMAGEEDITOR_H
 
-#include "../Image.h"
-#include "../ImageManager.h"
+#include "Image.h"
+#include "ImageManager.h"
 #include <string>
 #include <vector>
 

@@ -1,4 +1,4 @@
-#include "Menu.h"
+#include "../include/Menu.h"
 #include <iostream>
 
 Menu::Menu() : editor("") {}
