@@ -18,7 +18,7 @@ public:
     void erodeImage(int size);
     void resizeImage(double scale);
     void resizeImage(int width, int height);
-    void lightenDarken(double factor);
+    void lightenDarkenImage(int value);
     void stitchImages(const std::vector<int>& indices);
     void cannyEdgeDetection(double lowerThreshold, double upperThreshold, int kernelSize);
     void undo();
@@ -27,6 +27,7 @@ public:
 
 private:
     bool checkImageLoaded() const;
+    void updateDisplay() const;
     ImageManager imageManager;
 };
 

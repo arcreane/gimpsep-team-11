@@ -25,6 +25,7 @@ void ImageEditor::loadImage(const std::string& imagePath) {
     } else {
         imageManager.addImage(image);
         std::cout << "Image loaded successfully from " << imagePath << std::endl;
+        updateDisplay();
     }
 }
 
@@ -72,21 +73,25 @@ bool ImageEditor::checkImageLoaded() const {
 void ImageEditor::dilateImage(int size) {
     if (!checkImageLoaded()) return;
 
-    cv::Mat image = imageManager.getCurrentImage().getImage();
+    cv::Mat currentImage = imageManager.getCurrentImage().getImage();
+    cv::Mat result;
     cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(size, size));
-    cv::dilate(image, image, element);
-    imageManager.addToHistory(Image(image, ""));
-    std::cout << "Image dilation applied with size " << size << std::endl;
+    cv::dilate(currentImage, result, element);
+    imageManager.addToHistory(Image(result, ""));
+
+    updateDisplay();
 }
 
 void ImageEditor::erodeImage(int size) {
     if (!checkImageLoaded()) return;
 
-    cv::Mat image = imageManager.getCurrentImage().getImage();
+    cv::Mat currentImage = imageManager.getCurrentImage().getImage();
+    cv::Mat result;
     cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(size, size));
-    cv::erode(image, image, element);
-    imageManager.addToHistory(Image(image, ""));
-    std::cout << "Image erosion applied with size " << size << std::endl;
+    cv::erode(currentImage, result, element);
+    imageManager.addToHistory(Image(result, ""));
+
+    updateDisplay();
 }
 
 void ImageEditor::resizeImage(double scale) {
@@ -95,8 +100,21 @@ void ImageEditor::resizeImage(double scale) {
 void ImageEditor::resizeImage(int width, int height) {
 }
 
-void ImageEditor::lightenDarken(double factor) {
+void ImageEditor::lightenDarkenImage(int value) {
+    if (!checkImageLoaded()) return;
+
+    cv::Mat currentImage = imageManager.getCurrentImage().getImage();
+    cv::Mat result;
+
+    double alpha = 1.0;
+    double beta = value;
+    cv::addWeighted(currentImage, alpha, currentImage, 0, beta, result);
+
+    imageManager.addToHistory(Image(result, ""));
+    updateDisplay();
 }
+
+
 
 void ImageEditor::stitchImages(const std::vector<int>& indices) {
 }
@@ -110,7 +128,7 @@ void ImageEditor::displayImage() const {
     cv::destroyAllWindows();
     cv::imshow("Image", imageManager.getCurrentImage().getImage());
     std::cout << "Press any key to close the image window..." << std::endl;
-    cv::waitKey(0); // Wait for a key press indefinitely
+    cv::waitKey(1);
     cv::destroyWindow("Image");
 }
 
@@ -118,6 +136,7 @@ void ImageEditor::displayImage() const {
 void ImageEditor::undo() {
     if (imageManager.undo()) {
         std::cout << "Undo successful." << std::endl;
+        updateDisplay();  // Display the image after undoing
     } else {
         std::cout << "No more steps to undo." << std::endl;
     }
@@ -129,4 +148,17 @@ void ImageEditor::selectImage(int index) {
 
 std::vector<Image> ImageEditor::getAllImages() const {
     return imageManager.getAllImages();
+}
+
+void ImageEditor::updateDisplay() const {
+    if (!checkImageLoaded()) {
+        std::cout << "No image loaded to display." << std::endl;
+        return;
+    }
+
+    cv::destroyAllWindows();  // Close any open windows
+    cv::imshow("Image", imageManager.getCurrentImage().getImage());
+    std::cout << "Press any key to close the image window..." << std::endl;
+    cv::waitKey(2);
+    cv::destroyWindow("Image");
 }

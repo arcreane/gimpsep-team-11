@@ -9,7 +9,6 @@ void ImageManager::addImage(const Image& image) {
         addToHistory(image);
     }
 }
-
 bool ImageManager::undo() {
     if (currentIndex > 0) {
         currentIndex--;
@@ -47,4 +46,9 @@ void ImageManager::addMultipleImages(const std::vector<std::string>& paths) {
 
 std::vector<Image> ImageManager::getAllImages() const {
     return images;
+}
+
+
+int ImageManager::getIndex() {
+    return currentIndex;
 }

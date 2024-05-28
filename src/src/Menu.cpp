@@ -1,5 +1,6 @@
 #include "../include/Menu.h"
 #include <iostream>
+#include <opencv2/highgui.hpp>
 
 Menu::Menu() : editor("") {}
 
@@ -8,7 +9,7 @@ void Menu::run() {
     while (true) {
         displayMenu();
         std::cin >> choice;
-        if (choice == 12) {
+        if (choice == 11) {
             break;
         }
         processInput(choice);
@@ -26,9 +27,8 @@ void Menu::displayMenu() {
     std::cout << "7. Lighten/Darken image\n";
     std::cout << "8. Stitch images into panorama\n";
     std::cout << "9. Apply Canny edge detection\n";
-    std::cout << "10. Display current image\n";
-    std::cout << "11. Undo last operation\n";
-    std::cout << "12. Exit\n";
+    std::cout << "10. Undo last operation\n";
+    std::cout << "11. Exit\n";
     std::cout << "Select an option: ";
 }
 
@@ -62,9 +62,6 @@ void Menu::processInput(int choice) {
             cannyEdgeDetection();
             break;
         case 10:
-            displayImage();
-            break;
-        case 11:
             undo();
             break;
         default:
@@ -115,6 +112,10 @@ void Menu::resizeImage() {
 }
 
 void Menu::lightenDarkenImage() {
+    int value;
+    std::cout << "Enter a positive value to lighten or negative to darken the image: ";
+    std::cin >> value;
+    editor.lightenDarkenImage(value);
 }
 
 void Menu::stitchImages() {
@@ -123,9 +124,6 @@ void Menu::stitchImages() {
 void Menu::cannyEdgeDetection() {
 }
 
-void Menu::displayImage() {
-    editor.displayImage();
-}
 
 void Menu::undo() {
     editor.undo();
