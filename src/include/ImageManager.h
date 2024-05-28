@@ -14,6 +14,7 @@ public:
     void addToHistory(const Image& image);
     void addMultipleImages(const std::vector<std::string>& paths);
     std::vector<Image> getAllImages() const;
+    int getIndex();
 
 private:
     std::vector<Image> history;

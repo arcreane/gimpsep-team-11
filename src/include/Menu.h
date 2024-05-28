@@ -21,7 +21,6 @@ private:
     void lightenDarkenImage();
     void stitchImages();
     void cannyEdgeDetection();
-    void displayImage();
     void undo();
 
     ImageEditor editor;
