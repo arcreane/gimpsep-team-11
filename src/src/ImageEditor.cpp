@@ -159,6 +159,6 @@ void ImageEditor::updateDisplay() const {
     cv::destroyAllWindows();  // Close any open windows
     cv::imshow("Image", imageManager.getCurrentImage().getImage());
     std::cout << "Press any key to close the image window..." << std::endl;
-    cv::waitKey(2);
+    cv::waitKey(0);
     cv::destroyWindow("Image");
 }
