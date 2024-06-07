@@ -39,11 +39,11 @@ bool ImageEditor::saveImage(const std::string& outputPath) {
 
     std::string savePath = outputPath;
 
-    /*  if (!hasValidExtension(outputPath)) {
-          std::cerr << "Invalid file extension. Try again" << std::endl;
-          return false;
-      }
-      */
+  /*  if (!hasValidExtension(outputPath)) {
+        std::cerr << "Invalid file extension. Try again" << std::endl;
+        return false;
+    }
+    */
 
     if (cv::imwrite(savePath, imageManager.getCurrentImage().getImage())) {
         std::cout << "Image saved to " << savePath << std::endl;
@@ -67,16 +67,7 @@ bool ImageEditor::saveImage(const std::string& outputPath) {
  */
 
 bool ImageEditor::checkImageLoaded() const {
-    if(imageManager.getCurrentImage().getImage().empty()){
-        std::cout << "No image loaded." << std::endl;
-        return 0;
-    }
-    return 1;
-    // return(!imageManager.getCurrentImage().getImage().empty());
-}
-
-void ImageEditor::listLoadedImage() const{
-    imageManager.listLoadedImage();
+    return !imageManager.getCurrentImage().getImage().empty();
 }
 
 void ImageEditor::dilateImage(int size) {
@@ -104,27 +95,9 @@ void ImageEditor::erodeImage(int size) {
 }
 
 void ImageEditor::resizeImage(double scale) {
-    if (!checkImageLoaded()) return;
-
-    cv::Mat currentImage = imageManager.getCurrentImage().getImage();
-    cv::Mat result;
-    cv::resize(currentImage, result,
-               cv::Size(round(scale*currentImage.cols), round(scale*currentImage.rows)), scale, scale,
-               cv::INTER_LINEAR);
-    imageManager.addToHistory(Image(result, ""));
-
-    updateDisplay();
 }
 
 void ImageEditor::resizeImage(int width, int height) {
-    if (!checkImageLoaded()) return;
-
-    cv::Mat currentImage = imageManager.getCurrentImage().getImage();
-    cv::Mat result;
-    cv::resize(currentImage, result, cv::Size(width, height), cv::INTER_LINEAR);
-    imageManager.addToHistory(Image(result, ""));
-
-    updateDisplay();
 }
 
 void ImageEditor::lightenDarkenImage(int value) {
@@ -144,35 +117,9 @@ void ImageEditor::lightenDarkenImage(int value) {
 
 
 void ImageEditor::stitchImages(const std::vector<int>& indices) {
-    std::vector <cv::Mat>images;
-    cv::Mat result;
-    cv::Stitcher::Mode mode = cv::Stitcher::PANORAMA;
-
-    images=imageManager.getIndexImage(indices);
-
-    std::cout << "Images accepted." << std::endl;
-    cv::Ptr<cv::Stitcher> stitcher=cv::Stitcher::create(mode);
-    cv::Stitcher::Status status = stitcher->stitch(images, result);
-
-
-    if (status != cv::Stitcher::OK){
-        std::cout << "Can't stitch images, error code = " << int(status) << std::endl;
-    }
-    else{
-        imageManager.addToHistory(Image(result, ""));
-        updateDisplay();
-    }
 }
 
 void ImageEditor::cannyEdgeDetection(double lowerThreshold, double upperThreshold, int kernelSize) {
-    if (!checkImageLoaded()) return;
-
-    cv::Mat currentImage = imageManager.getCurrentImage().getImage();
-    cv::Mat result;
-    cv::Canny(currentImage, result, lowerThreshold, upperThreshold, kernelSize);
-
-    imageManager.addToHistory(Image(result, ""));
-    updateDisplay();
 }
 
 void ImageEditor::displayImage() const {
