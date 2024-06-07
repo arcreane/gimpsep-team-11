@@ -214,4 +214,5 @@ CMakeFiles/src.dir/src/ImageManager.cpp.obj: \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/std_mutex.h \
  C:/opencv-4.5.2-mingw/include/opencv2/core/optim.hpp \
  C:/opencv-4.5.2-mingw/include/opencv2/core/ovx.hpp \
- C:/opencv-4.5.2-mingw/include/opencv2/core/cvdef.h
+ C:/opencv-4.5.2-mingw/include/opencv2/core/cvdef.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iostream

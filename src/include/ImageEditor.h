@@ -14,6 +14,7 @@ public:
     void loadMultipleImages(const std::vector<std::string>& imagePaths);
     bool saveImage(const std::string& outputPath);
     void displayImage() const;
+    void listLoadedImage() const;
     void dilateImage(int size);
     void erodeImage(int size);
     void resizeImage(double scale);

@@ -808,6 +808,7 @@ CMakeFiles/src.dir/src/ImageManager.cpp.obj
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/initializer_list
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ios
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iosfwd
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iostream
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/istream
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/limits
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/memory
