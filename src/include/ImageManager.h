@@ -10,6 +10,8 @@ public:
     void addImage(const Image& image);
     bool undo();
     Image getCurrentImage() const;
+    std::vector<cv::Mat> getIndexImage(const std::vector<int>& indeces) const;
+    void listLoadedImage() const;
     void selectImage(int index);
     void addToHistory(const Image& image);
     void addMultipleImages(const std::vector<std::string>& paths);
