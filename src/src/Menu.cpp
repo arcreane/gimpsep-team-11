@@ -166,7 +166,6 @@ void Menu::stitchImages() {
 void Menu::cannyEdgeDetection() {
     double lowerThreshold, upperThreshold;
     int kernelSize;
-    std::cout << "  --- Help" << std::endl;
     std::cout << "  --- kernelSize between (3,7)" << std::endl;
     std::cout << "Enter lowerThreshold, upperThreshold and kernelSize: ";
     std::cin >> lowerThreshold >> upperThreshold >> kernelSize;
