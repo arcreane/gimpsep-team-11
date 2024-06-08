@@ -1,4 +1,5 @@
 #include "../include/ImageManager.h"
+#include <iostream>
 
 void ImageManager::addImage(const Image& image) {
     images.push_back(image);
@@ -22,6 +23,22 @@ Image ImageManager::getCurrentImage() const {
         return history[currentIndex];
     }
     return Image();
+}
+std::vector<cv::Mat> ImageManager::getIndexImage(const std::vector<int>& indeces) const{
+    std::vector <cv::Mat> images;
+    for (const auto& idx : indeces) {
+        if (idx >= 0 && idx < history.size()){
+            images.push_back(history[idx].getImage());
+        }
+    }
+    return images;
+}
+
+void ImageManager::listLoadedImage() const{
+    int idx=0;
+    for (const auto& img : history) {
+        std::cout << "[" << idx++ << "] " << img.getPath() << std::endl;
+    }
 }
 
 void ImageManager::selectImage(int index) {
