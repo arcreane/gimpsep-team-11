@@ -180,7 +180,7 @@ void ImageEditor::rotateImage(double angle){
     cv::Mat currentImage = imageManager.getCurrentImage().getImage();
     cv::Mat result;
 
-    cv::Point2f center((image.cols - 1) / 2.0, (image.rows - 1) / 2.0);
+    cv::Point2f center((currentImage.cols - 1) / 2.0, (currentImage.rows - 1) / 2.0);
     cv::Mat rotation_matrix = getRotationMatrix2D(center, angle, 1.0);
     warpAffine(currentImage, result, rotation_matrix, currentImage.size());
 
