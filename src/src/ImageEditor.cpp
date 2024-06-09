@@ -175,6 +175,20 @@ void ImageEditor::cannyEdgeDetection(double lowerThreshold, double upperThreshol
     updateDisplay();
 }
 
+void ImageEditor::rotateImage(double angle){
+    if (!checkImageLoaded()) return;
+    cv::Mat currentImage = imageManager.getCurrentImage().getImage();
+    cv::Mat result;
+
+    cv::Point2f center((image.cols - 1) / 2.0, (image.rows - 1) / 2.0);
+    cv::Mat rotation_matrix = getRotationMatrix2D(center, angle, 1.0);
+    warpAffine(currentImage, result, rotation_matrix, currentImage.size());
+
+    imageManager.addToHistory(Image(result, ""));
+    updateDisplay();
+}
+
+
 void ImageEditor::displayImage() const {
     if (!checkImageLoaded()) return;
 
