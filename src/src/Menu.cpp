@@ -1,18 +1,26 @@
 #include "../include/Menu.h"
 #include <iostream>
+#include <limits>
 #include <opencv2/highgui.hpp>
 
 Menu::Menu() : editor("") {}
 
 void Menu::run() {
-    int choice = 0;
     while (true) {
+        int choice; 
         displayMenu();
         std::cin >> choice;
-        if (choice == 11) {
-            break;
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Type number between 1, 12." << std::endl;
         }
-        processInput(choice);
+        else{
+            if (choice == 12) {
+                break;
+            }
+            processInput(choice);
+        }
     }
 }
 
@@ -27,8 +35,9 @@ void Menu::displayMenu() {
     std::cout << "  7. Lighten/Darken image\n";
     std::cout << "  8. Stitch images into panorama\n";
     std::cout << "  9. Apply Canny edge detection\n";
-    std::cout << "  10. Undo last operation\n";
-    std::cout << "  11. Exit\n";
+    std::cout << "  10. Rotate Image\n";
+    std::cout << "  11. Undo last operation\n";
+    std::cout << "  12. Exit\n";
     std::cout << "Select an option: ";
 }
 
@@ -62,6 +71,9 @@ void Menu::processInput(int choice) {
             cannyEdgeDetection();
             break;
         case 10:
+            rotateImage();
+            break;  
+        case 11:
             undo();
             break;
         default:
@@ -121,7 +133,7 @@ void Menu::resizeImage() {
     if(type==1 || type==2){
         if(type==1){
             std::cout<<"Enter the scale: " ;
-            std::cin >> scale; 
+            std::cin >> scale;
             editor.resizeImage(scale);
         }
         else{
@@ -166,12 +178,19 @@ void Menu::stitchImages() {
 void Menu::cannyEdgeDetection() {
     double lowerThreshold, upperThreshold;
     int kernelSize;
-    std::cout << "  --- Help" << std::endl;
     std::cout << "  --- kernelSize between (3,7)" << std::endl;
     std::cout << "Enter lowerThreshold, upperThreshold and kernelSize: ";
     std::cin >> lowerThreshold >> upperThreshold >> kernelSize;
     editor.cannyEdgeDetection(lowerThreshold, upperThreshold, kernelSize);
 }
+
+void Menu::rotateImage() {
+    double angle;
+    std::cout << "Enter the angle you wish to rotate (0-359)" << std::endl;
+    std::cin >> angle;
+    editor.rotateImage(angle);
+}
+
 
 
 void Menu::undo() {

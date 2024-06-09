@@ -6,7 +6,8 @@
 
 class Image {
 public:
-    Image();  // Default constructor
+
+    Image();
     Image(const std::string& path);
     Image(const cv::Mat& image, const std::string& path = "");
 

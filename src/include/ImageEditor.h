@@ -22,6 +22,7 @@ public:
     void lightenDarkenImage(int value);
     void stitchImages(const std::vector<int>& indices);
     void cannyEdgeDetection(double lowerThreshold, double upperThreshold, int kernelSize);
+    void rotateImage(double angle);
     void undo();
     void selectImage(int index);
     std::vector<Image> getAllImages() const;
