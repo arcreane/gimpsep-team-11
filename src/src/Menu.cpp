@@ -27,8 +27,9 @@ void Menu::displayMenu() {
     std::cout << "  7. Lighten/Darken image\n";
     std::cout << "  8. Stitch images into panorama\n";
     std::cout << "  9. Apply Canny edge detection\n";
-    std::cout << "  10. Undo last operation\n";
-    std::cout << "  11. Exit\n";
+    std::cout << "  10. Rotate Image";
+    std::cout << "  11. Undo last operation\n";
+    std::cout << "  12. Exit\n";
     std::cout << "Select an option: ";
 }
 
@@ -62,6 +63,9 @@ void Menu::processInput(int choice) {
             cannyEdgeDetection();
             break;
         case 10:
+            rotateImage();
+            break;  
+        case 11:
             undo();
             break;
         default:
@@ -171,6 +175,14 @@ void Menu::cannyEdgeDetection() {
     std::cin >> lowerThreshold >> upperThreshold >> kernelSize;
     editor.cannyEdgeDetection(lowerThreshold, upperThreshold, kernelSize);
 }
+
+void Menu::rotateImage() {
+    double angle;
+    std::cout << "Enter the angle you wish to rotate (0-359)" << std::endl;
+    std::cin >> angle;
+    editor.rotateImage(angle);
+}
+
 
 
 void Menu::undo() {
