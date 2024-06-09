@@ -1,18 +1,26 @@
 #include "../include/Menu.h"
 #include <iostream>
+#include <limits>
 #include <opencv2/highgui.hpp>
 
 Menu::Menu() : editor("") {}
 
 void Menu::run() {
-    int choice = 0;
     while (true) {
+        int choice; 
         displayMenu();
         std::cin >> choice;
-        if (choice == 12) {
-            break;
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Type number between 1, 12." << std::endl;
         }
-        processInput(choice);
+        else{
+            if (choice == 12) {
+                break;
+            }
+            processInput(choice);
+        }
     }
 }
 
