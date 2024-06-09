@@ -9,7 +9,7 @@ void Menu::run() {
     while (true) {
         displayMenu();
         std::cin >> choice;
-        if (choice == 11) {
+        if (choice == 12) {
             break;
         }
         processInput(choice);
@@ -27,7 +27,7 @@ void Menu::displayMenu() {
     std::cout << "  7. Lighten/Darken image\n";
     std::cout << "  8. Stitch images into panorama\n";
     std::cout << "  9. Apply Canny edge detection\n";
-    std::cout << "  10. Rotate Image";
+    std::cout << "  10. Rotate Image\n";
     std::cout << "  11. Undo last operation\n";
     std::cout << "  12. Exit\n";
     std::cout << "Select an option: ";
